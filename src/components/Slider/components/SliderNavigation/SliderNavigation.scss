@@ -1,0 +1,16 @@
+.slider-navigation {
+	display: flex;
+	align-items: center;
+
+	&--tile {
+		column-gap: fluid-to-laptop(16, 12);
+		padding: fluid-to-laptop(16, 12);
+		background-color: var(--color-black-06);
+		border: var(--border);
+		border-radius: var(--border-radius-l);
+
+		@include laptop {
+			border-radius: var(--border-radius-m);
+		}
+	}
+}
