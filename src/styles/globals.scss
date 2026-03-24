@@ -116,3 +116,9 @@ a {
 :has(.swiper) { // <-- Благодаря вкладке elements в DevTools удалось обнаружить странную проблему: элементы с классом swiper-slide увеличиваются по ширине каждую секунду. Такое возникает в случае, когда в дом дереве над элементом	свайпера хотя бы у одного из предков указан display как flex, inline-flex, grid, inline-grid. Есть решение: родительским элемнтам с таким display правило (минимальная ширина - 0)
 	min-width: 0;
 }
+
+.header,
+.content > *:not(:last-child),
+.footer {
+	display: none !important;
+}

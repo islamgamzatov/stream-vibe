@@ -1,0 +1,43 @@
+.device-card {
+	display: grid;
+	row-gap: fluid(30, 20);
+	padding: fluid(50, 24);
+	border-radius: var(--border-radius-l);
+  background:
+    linear-gradient(222deg, rgba(229, 0, 0, 0.50) -208.03%, rgba(229, 0, 0, 0.00) 41.32%),
+    var(--color-black-06);
+	border: var(--border);
+
+	@include laptop {
+		border-radius: var(--border-radius-m);
+	}
+
+	&__header {
+		display: flex;
+		align-items: center;
+		column-gap: fluid(16, 10);
+	}
+
+	&__image-wrapper {
+		@include flex-center;
+		@include square(fluid(72, 44));
+
+		background-color: var(--color-black-08);
+		border: var(--border-width-s) solid var(--color-black-12);
+		border-radius: var(--border-radius-l);
+
+		@include laptop {
+			border-radius: var(--border-radius-m);
+		}
+
+		@include mobile {
+			border-radius: var(--border-radius-s);
+		}
+	}
+
+	&__image {
+		width: 55%;
+		object-fit: contain;
+		color: var(--c)
+	}
+}
