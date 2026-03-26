@@ -1,5 +1,6 @@
 .accordion-group {
 	&--has-counter {
+		--acordionGroupCounterHeight: #{fluid(67, 46)};
 		counter-reset: custom-counter;
 		list-style: none;
 
@@ -13,7 +14,7 @@
 
 				content: counter(custom-counter, decimal-leading-zero); // Благодаря строчке decimal-leading-zero для первых девяти элементов списка в кастомный счетчик в начало добавиться "ведущий ноль" (01, 02, 03 и т.д.)
 				min-width: fluid(62, 42);
-				height: fluid(67, 46);
+				height: var(--acordionGroupCounterHeight);
 				font-size: fluid-to-laptop(20, 16);
 				font-weight: 600;
 				color: var(--color-white);
@@ -42,9 +43,9 @@
 
 	&__item {
 		display: flex;
+		column-gap: fluid-to-laptop(20, 16);
 		padding: fluid-to-laptop(34, 24);
 		break-inside: avoid-column;
-		column-gap: fluid-to-laptop(20, 16);
 
 		@include tablet-above {
 			&--last-column-item {

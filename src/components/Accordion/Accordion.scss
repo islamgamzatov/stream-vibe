@@ -1,0 +1,78 @@
+.accordion {
+	width: 100%;
+
+	&__details {
+		&[open] {
+			.accordion__title::after {
+				rotate: 0deg;
+			}
+
+			& + .accordion__content { // Через селектор смежного элемента обратимся к соседнему, что лежит на том же уровне.
+				grid-template-rows: 1fr;
+			}
+		}
+	}
+
+	&__summary {
+		color: var(--color-white);
+		list-style: none; // Скроем default arrow, но это сработает не для всех браузеров, нужно добавить кое-что еще.
+		cursor: pointer; // Добавление курсора руки при наведении на элемент.
+		user-select: none; // Отключение возможности выделять текст, чтобы пир случайном double click на элемент текст не выделялся.
+
+		&::-webkit-details-market {
+			display: none; // Так мы наверняка скроем стандартную стрелочку summary во всех браузерах.
+		}
+
+		@include hover {
+			color: var(--color-red-60);
+		}
+
+
+	}
+
+	&__title {
+		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: var(--acordionGroupCounterHeight); // Когда аккордеон закрыт, блок с числом, заголовок и значок выравнены по одной линии, а при раскрытии ничего не меняется.
+		padding-right: 50px;// Зарезервируем под значок пространство. Т.к. как значок мы рисовали через CSS и псевдоэлементы, которые располлагали абсолютом относительно заголовка, то, чтобы при длинном заголовке текст не наехал на значок, нужно самому элементу заголовка задать какой-нибудь внутрненний отступ вправо.
+		color: inherit;
+		transition-duration: var(--transition-duration);
+
+		&::before, 
+		&::after {
+			@include abs-y;
+
+			content: '';
+			right: 0;
+			width: fluid-to-laptop(20, 16);
+			height: 2.5px;
+			background-color: var(--color-white);
+			border-radius: 10px;
+			transition-duration: var(--transition-duration);
+
+			@include laptop { // Почему так, а не через fluid-to-laptop? Для диапазона полупикселя использовать clamp с его вычислениями нерационально.
+				height: 2px;
+			}
+
+		}
+
+		&::after {
+			rotate: 90deg;
+		}
+	}
+
+	&__content {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition-duration: var(--transition-duration-longer);
+
+		&-inner {
+			overflow: hidden;
+		}
+
+		&-body {
+			margin-top: 20px; // Отвечает за расстояние между заголовком аккордеона и его раскрытым контентом.
+		}
+	}
+} 
