@@ -1,11 +1,37 @@
 import 'swiper/css'
 import './Slider.scss' // Если пренебречь последовательностью подключения файлов, то мы рискукем обрубить себе возможность повлиять на стили Slider
 import SliderNavigation from './components/SliderNavigation'
+import classNames from 'classnames'
 
 const defaultSliderParams = { // Этот объект следует заполнить в соотвествии API библиотеки Swiper. Передо мной стоит задача сделать так, чтобы JSX компонент Slider в своих параметрах мог принимать объект конфигурации для Swiper, за что будет отвечать SliderParams
 	slidesPerView: 5, // Кол-во слайдов, которое мы видим на desktop версии макета. Отвечает за кол-во единовременно отображаемых слайдов.
 	slidesPerGroup: 5, // Отвечает за кол-во сгруппированных слайдов, которые будут прокручиваться группами. Зачастую для slidesPerView и slidesPerGroup задают одинаковые значения.
 	spaceBetween: 30,
+	breakpoints: { // В значении объект со свойствами, каждое из которых отвечает за определенный диапазон ширины экрана. В breakpoints нужно прописывать параметры по принципу mobile-first (от определенной ширины и более)
+		0: {
+			slidesPerView: 2,
+			slidesPerGroup: 1,
+			spaceBetween: 20,
+		},
+		481: {
+			slidesPerView: 3,
+			slidesPerGroup: 3,
+			spaceBetween: 20,
+		},
+		768: {
+			slidesPerView: 4,
+			slidesPerGroup: 4,
+			spaceBetween: 20,
+		},
+		1024: {
+			spaceBetween: 20,
+			allowTouchMove: false,
+		},
+		1441: {
+			spaceBetween: 30,
+			allowTouchMove: false,
+		}
+	}
 }
 
 const Slider = (props) => {
@@ -13,10 +39,14 @@ const Slider = (props) => {
 		children,
 		navigationTargetElementId = null, // При вызове компонента сюда будет передаваться строка с Id элемента, который и будет отвечать за навигацию слайдера. На этот параметр мы будем опираться в JS коде, чтобы найти конкретный дом элемент с навигацией слайдера и связать его с конкретным слайдером. Когда нам протребуется визуально вынести навигацию за пределы слайдера.
 		sliderParams = defaultSliderParams, // Нам нужно сделать так, чтобы JSX компонент Slider в своих параметрах мог принимать объект конфигурации для Swiper, за что и отвечает sliderParams.
+		bleedMobileS,
+		hasScrollbar = true,
 	} = props
 	return (
 		<div 
-			className="slider"
+			className={classNames('slider', {
+				'bleed-mobile-s': bleedMobileS
+			})}
 			data-js-slider={JSON.stringify({ // Прокидываем sliderParams в разметку так, чтобы далее мы могли в рамках js кода получить эти данные
 				sliderParams, // Объект кофигурации для Swiper
 				navigationTargetElementId // Для определения DOM-элемента, который в рамках конкретного Slider будет отвечать за навигацию.
@@ -33,6 +63,13 @@ const Slider = (props) => {
 			</div>
 			{!navigationTargetElementId && (
 				<SliderNavigation className="slider__navigation"/>
+			)}
+
+			{hasScrollbar && (
+				<div 
+					className='slider__scrollbar visible-mobile'
+					data-js-slider-scrollbar=""
+				/>
 			)}
 		</div>
 	)

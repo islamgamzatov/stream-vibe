@@ -1,7 +1,7 @@
 .category-card {
 	--categoryCardImagesGradientOpacity: 1;
 
-	display: inline-flex; // В качестве корневого элемента компонента мы сделали ссылку, у которой по умолчанию браузером display выставляется как inline. Мы меняем параметр отображения элемнта.
+	display: flex; // В качестве корневого элемента компонента мы сделали ссылку, у которой по умолчанию браузером display выставляется как inline. Мы меняем параметр отображения элемнта.
 	flex-direction: column;
 	padding: fluid(30, 20);
 	background-color: var(--color-black-10);
@@ -17,6 +17,10 @@
 		
 		color: var(--color-white);
 		border-color: currentColor; // Ссылаемся на значение свойства выше.
+	}
+
+	&:focus-visible {
+		outline-offset: -2px;
 	}
 
 	&__images {
