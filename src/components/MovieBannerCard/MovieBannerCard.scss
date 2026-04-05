@@ -1,0 +1,53 @@
+.movie-banner-card {
+	position: relative;
+	text-align: center;
+	border: var(--border);
+	border-radius: var(--border-radius-l);
+	overflow: hidden; // Выше было задано скругление. Внутри блока есть изображение, которое не должно выходить за пределый этого скругления.
+
+	&__image {
+		width: 100%;
+		min-height: fluid(835, 468); // Укажем высоту, равную высоте самого баннера, т.к. баннер должен подстраиваться под размеры этой картинки.
+		object-fit: cover; // Чтобы картинка не теряла свои пропорции
+	}
+	
+	&__inner {
+		@include abs-cover; // Растянем элемент абсолютом на всю ширину и высоту ближайшего не статик позиционированного элемента (movie-banner-card)
+
+		display: flex; 
+		flex-direction: column;
+		justify-content: end;
+		align-items: center;
+		row-gap: fluid(30, 20);
+		padding: fluid-to-laptop(126, 104) fluid(50, 24); // Т.к. элемент навигации будет добавлен абсолютом поверх самого слайдера, при вычислении внутренних отступов у movie-banner-card__inner считаем, что этих элементов не существует.
+		background-image: linear-gradient(0deg, var(--color-black-08) 0%, rgba(20, 20, 20, 0.00) 100%);
+
+		@include mobile {
+			padding-block: 16px;
+		}
+	}
+	
+	&__body {
+		display: grid;
+		row-gap: fluid-to-laptop(4, 2);
+	}
+
+	&__description {
+		max-width: fluid-to-laptop(1194, 960);
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+
+		@include mobile {
+			flex-direction: column;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		column-gap: fluid-to-laptop(10, 8);
+	}
+}
