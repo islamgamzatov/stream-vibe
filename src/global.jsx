@@ -4,6 +4,7 @@ import { Head } from "minista" // Встроенный в фреймворк min
 import Header from "@/layouts/Header" // Обращение к одноименному Header выглядит непрофессионально. В папке каждого компонента будет собственный файл с названием index.js
 import Content from "@/layouts/Content"
 import Footer from "@/layouts/Footer"
+import Banner from './sections/Banner'
 
 export default function (props) { // Компонент в параметрах будет ожидать сущность props, которая является объектом.
 
@@ -24,8 +25,9 @@ export default function (props) { // Компонент в параметрах 
         <link rel="manifest" href="/site.webmanifest" />
      </Head>
       <Header url={url} isFixed={isHeaderFixed}/>
-      <Content>
+      <Content isResetPaadingTop={isHeaderFixed}> {/* Так мы отключим padding-top для элемента main там, где у нас будет фиксированная шапка (только на главной странице) */}
         {children}
+        <Banner />
       </Content>
       <Footer />
     </>
