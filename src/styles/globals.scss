@@ -120,5 +120,5 @@ a {
 .header,
 .content > *:not(:nth-last-child(2)), // Таким образом будет осталвена видимой только та секция, которую мы разрабатываем в конкретный момент
 .footer {
-	display: none !important;
+	// display: none !important;
 }

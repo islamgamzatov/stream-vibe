@@ -1,5 +1,6 @@
 .slider-navigation {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 
 	&--tile {
@@ -12,6 +13,13 @@
 		@include laptop {
 			border-radius: var(--border-radius-m);
 		}
+	}
+
+	&--abs-bottom {
+		position: absolute;
+		z-index: 1;
+		inset-inline: fluid-to-laptop(50, 40); // Растянем элемент на все доступную ему ширину.
+		bottom: fluid-to-laptop(20, 16);
 	}
 
 	&__pagination {

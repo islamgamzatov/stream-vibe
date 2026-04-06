@@ -43,9 +43,16 @@
 
 		@include mobile {
 			flex-direction: column;
+			width: 100%;
 		}
 	}
-
+	
+	&__play-button {
+		@include mobile-s {
+			width: 100%;
+		}
+	}
+	
 	&__actions {
 		display: flex;
 		column-gap: fluid-to-laptop(10, 8);

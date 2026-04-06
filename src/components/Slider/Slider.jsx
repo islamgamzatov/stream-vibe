@@ -40,7 +40,12 @@ const Slider = (props) => {
 		navigationTargetElementId = null, // При вызове компонента сюда будет передаваться строка с Id элемента, который и будет отвечать за навигацию слайдера. На этот параметр мы будем опираться в JS коде, чтобы найти конкретный дом элемент с навигацией слайдера и связать его с конкретным слайдером. Когда нам протребуется визуально вынести навигацию за пределы слайдера.
 		sliderParams = defaultSliderParams, // Нам нужно сделать так, чтобы JSX компонент Slider в своих параметрах мог принимать объект конфигурации для Swiper, за что и отвечает sliderParams.
 		bleedMobileS,
-		hasScrollbar = true,
+		hasScrollbarOnMobile = true,
+		/*
+			'' (default) | 'abs-bottom'
+		*/
+		navigationPosition = '',
+		isNavigationHiddenMobile = true,
 	} = props
 	return (
 		<div 
@@ -62,10 +67,14 @@ const Slider = (props) => {
 				</ul>
 			</div>
 			{!navigationTargetElementId && (
-				<SliderNavigation className="slider__navigation"/>
+				<SliderNavigation 
+					className="slider__navigation"
+					position={navigationPosition}
+					isHiddenMobile={isNavigationHiddenMobile}
+				/>
 			)}
 
-			{hasScrollbar && (
+			{hasScrollbarOnMobile && (
 				<div 
 					className='slider__scrollbar visible-mobile'
 					data-js-slider-scrollbar=""

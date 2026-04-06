@@ -8,13 +8,19 @@ const SliderNavigation = (props) => {
 		id, 
 		hasPagination = true, // Данный параметр будет отвечать за вывод в рамках компонента SliderNavigation блока с пагинацией (полосочки, отображающие текущий статус слайдера)
 		mode = '', // '' (default) | 'tile'
-
+		/*
+			'' (default) | 'abs-bottom'
+		*/
+		position = '',
+		isHiddenMobile,
 	} = props
 
 	return (
 		<div 
 			className={classNames(className, 'slider-navigation', {
 				[`slider-navigation--${mode}`]: mode, // Когда сущнось mode будет не undefined и не пустой строкой, то корневому элементу slider-navigation добавиться дополнительный БЭМ-модификатор.
+				[`slider-navigation--${position}`]: position,
+				'hidden-mobile': isHiddenMobile,
 			})}
 			id={id}
 			data-js-slider-navigation=""
