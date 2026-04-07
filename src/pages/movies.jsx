@@ -1,3 +1,4 @@
+import Collections from "../sections/Collections"
 import MoviesBanner from "../sections/MoviesBanner"
 
 export const metadata = {
@@ -8,6 +9,7 @@ export default function () {
   return (
     <>
       <MoviesBanner />
+      <Collections />
     </>
   )
 }

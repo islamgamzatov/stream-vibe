@@ -4,7 +4,7 @@
 	--tabsNavigationPadding: #{fluid-to-laptop(10, 8)};
 
 	position: relative;
-	display: flex;
+	display: var(--tabsNavigationDisplay, flex); // Как это будет работать: если браузер обнаружит переменную tabsNavigationDisplay для tabsNavigation, то применит для этого свойства значение, указанное в переменной. Иначе flex.
 	padding: fluid-to-laptop(10, 8);
 	border: var(--border);
 	border-radius: var(--border-radius-m);

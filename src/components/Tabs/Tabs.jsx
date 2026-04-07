@@ -8,12 +8,15 @@ const Tabs = (props) => {
 		className,
 		title, // Компонент табов должен быть как-то озаглавлен. Т.к. по макету заголовка нет, мы все равно добавим визуально скрытый заголовок.
 		items = [], // Массив объектов, в каждом из которых должно быть свойство title, children и опциональное булевое поле isActive, отвечающее за то, активирована ли конкрентная вкладка табов или нет.
-		navigationTargetElementId = null,	
+		navigationTargetElementId = null,
+		isEnableOnlyOnMobile= false,
 	} = props
 
 	return (
 		<div 
-			className={classNames(className, 'tabs')}
+			className={classNames(className, 'tabs', {
+				'tabs--enable-only-on-mobile': isEnableOnlyOnMobile,
+			})}
 			data-js-tabs={JSON.stringify({
 				navigationTargetElementId,
 			})}
