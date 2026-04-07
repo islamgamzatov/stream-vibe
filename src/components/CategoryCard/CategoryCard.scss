@@ -57,6 +57,10 @@
 	}
 
 	&__title {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		row-gap: fluid-to-laptop(4, 2);
 		font-size: inherit;
 		font-weight: 600;
 	}

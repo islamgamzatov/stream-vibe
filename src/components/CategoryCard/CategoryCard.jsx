@@ -1,11 +1,13 @@
 import './CategoryCard.scss'
 import { Image } from 'minista'
 import Icon from '@/components/Icon'
+import Badge from '../Badge'
 
 const CategoryCard = (props) => {
 	const {
 		title, // Строка с текстом загловка
 		images = [], // Массив строк с путями до файлов изображений
+		badge
 	} = props
 
 	return (
@@ -21,7 +23,16 @@ const CategoryCard = (props) => {
 			</div>
 			<div className="category-card__body">
 				<h3 className="category-card__title">
-					{title}
+					{badge && (
+						<Badge
+							className="category-card__bage"
+							mode="accent"
+							isBig
+						>
+							{badge}
+						</Badge>
+					)}
+					<span>{title}</span>
 				</h3>
 				<Icon 
 					className="category-card__icon" 
