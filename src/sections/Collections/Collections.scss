@@ -1,0 +1,37 @@
+.collections {
+	&__group {
+		position: relative;
+		display: grid;
+		row-gap: fluid(100, 75);
+
+		@include mobile-above {
+			padding: fluid-to-laptop(50, 40);
+			border: var(--border);
+			border-radius: var(--border-radius-l);
+		}
+
+	}
+
+	&__title {
+		position: absolute;
+		top: 0;
+		left: fluid-to-laptop(50, 40);
+		padding: fluid-to-laptop(10, 8) fluid-to-laptop(24, 20);
+		translate: 0 -50%;
+		color: var(--color-white);
+		font-size: fluid-to-laptop(20, 16);
+		font-weight: 600;
+		background-color: var(--color-red-45);
+		border-radius: var(--border-radius-s);
+
+		@include laptop {
+			border-radius: var(--border-radius-xs);
+		}
+	}
+
+	&__section {
+		&.section { // Усилим специфичность благодаря комбинанации классов, присутствующих на элементе
+			padding: 0;
+		}
+	}
+}

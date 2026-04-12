@@ -207,6 +207,41 @@ const collectionGroups = [
 					}
 				}
 			},
+			{
+				title: "Trending Now",
+				movieItems: [
+					{
+						title: "Fight Club",
+						imgSrc: "/src/assets/categories/action/1.jpg",
+						duration: "2h 19min",
+						view: "2K",
+					},
+					{
+						title: "Fight Club",
+						imgSrc: "/src/assets/categories/action/1.jpg",
+						duration: "2h 19min",
+						view: "2K",
+					},
+					{
+						title: "Fight Club",
+						imgSrc: "/src/assets/categories/action/1.jpg",
+						duration: "2h 19min",
+						view: "2K",
+					},
+					{
+						title: "Fight Club",
+						imgSrc: "/src/assets/categories/action/1.jpg",
+						duration: "2h 19min",
+						view: "2K",
+					},
+					{
+						title: "Fight Club",
+						imgSrc: "/src/assets/categories/action/1.jpg",
+						duration: "2h 19min",
+						view: "2K",
+					},
+				],
+			}
 		]
 	}
 ]

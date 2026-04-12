@@ -7,12 +7,13 @@ const Icon = (props) => {
 		className,
 		name,
 		hasFill = false,
-		
+		ariaLabel,
 	} = props
 
 	return (
 		<span 
 			className={classNames(className, 'icon')}
+			aria-label={ariaLabel}
 		>
 			<MinistaIcon 
 				iconId={name} // По iconId, в который мы здесь передаем name, компонент MinistaIcon будет искать в папке src/assests/icons файл svg икноки с таким же названием.
