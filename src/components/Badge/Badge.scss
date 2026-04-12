@@ -6,7 +6,7 @@
 	font-size: fluid-to-laptop(14, 12);
 	font-weight: 500;
 	line-height: 1;
-	color: var(--color-red-60); // Иногда компонент Bage мы будет помещать внутрь элементов ссылок, у которых есть собственный color, который bage наследовать не додлжен.
+	color: var(--color-gray-60); // Иногда компонент Bage мы будет помещать внутрь элементов ссылок, у которых есть собственный color, который bage наследовать не додлжен.
 	white-space: nowrap;
 	background-color: var(--color-black-08);
 	border: var(--border);

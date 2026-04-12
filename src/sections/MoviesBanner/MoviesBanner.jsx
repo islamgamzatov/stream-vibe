@@ -7,24 +7,24 @@ const MoviesBanner = () => {
 
 	const movieCards = [
 		{
-			title: "Avengers : Endgame",
-			description: "With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.",
+			title: "Requiem for a Dream",
+			description: "The film depicts four characters affected by drug addiction and how it alters their physical and emotional states. Their addictions cause them to become imprisoned in a world of delusion and desperation.",
 			imgSrc: '/src/assets/images/movie-banner/1.jpg',
 		},
 		{
-			title: "Avengers : Endgame 2",
-			description: "With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.",
-			imgSrc: '/src/assets/images/movie-banner/1.jpg',
+			title: "Fight Club",
+			description: "Fight Club is a dark psychological thriller directed by David Fincher that critiques consumerism, corporate culture, and modern masculinity.",
+			imgSrc: '/src/assets/images/movie-banner/2.jpg',
 		},
 		{
-			title: "Avengers : Endgame 3",
-			description: "With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.",
-			imgSrc: '/src/assets/images/movie-banner/1.jpg',
+			title: "Se7en",
+			description: "Se7en is a dark, gritty psychological thriller directed by David Fincher, starring Morgan Freeman and Brad Pitt as two homicide detectives tracking a sadistic serial killer",
+			imgSrc: '/src/assets/images/movie-banner/3.jpg',
 		},
 		{
-			title: "Avengers : Endgame 4",
-			description: "With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.",
-			imgSrc: '/src/assets/images/movie-banner/1.jpg',
+			title: "American Beauty",
+			description: "American Beauty is a dark comedy-drama exploring suburban discontent, the American Dream, and personal liberation.",
+			imgSrc: '/src/assets/images/movie-banner/4.jpg',
 		},
 	]
 
