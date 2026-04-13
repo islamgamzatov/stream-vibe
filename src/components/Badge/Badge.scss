@@ -32,4 +32,10 @@
 		font-size: fluid(16, 12);
 		font-weight: 600;
 	}
+
+	&__icon {
+		&.icon { 
+			--iconSize: #{fluid-to-laptop(24, 20)};
+		}
+	}
 }

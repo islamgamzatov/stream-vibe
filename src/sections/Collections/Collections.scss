@@ -1,4 +1,13 @@
 .collections {
+	display: flex;
+	flex-direction: column;
+	row-gap: 50px;
+	padding-block: var(--section-padding-y);
+
+	&.tabs {
+		--tabsBodyRowGap: #{fluid-to-laptop(170, 138)};
+	}
+
 	&__group {
 		position: relative;
 		display: grid;

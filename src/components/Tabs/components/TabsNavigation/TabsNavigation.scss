@@ -31,7 +31,10 @@
 	}
 
 	&__button {
+		flex-grow: 1;
 		position: relative; // Чтобы псевдоэлемент (подлжожка с серым фоном) не перекрывал содержимое текстовое у кнопок.
+		display: inline-flex;
+		justify-content: center;
 		padding: fluid-to-laptop(14, 12) fluid-to-laptop(24, 20);
 		border-radius: var(--border-radius-m);
 		transition-duration: var(--transition-duration);
