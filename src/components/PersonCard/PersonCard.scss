@@ -1,16 +1,42 @@
 .person-card {
-	&__image {
-		width: fluid(102, 70);
-		border: 1px solid transparent;
-		border-radius: var(--border-radius-l);
-		transition-duration: var(--transition-duration);
-		
-		@include laptop {
-			border-radius: var(--border-radius-m);
-		}
+	&:has(.person-card__body) {
+		display: flex;
+		align-items: center;
+		column-gap: fluid-to-laptop(10, 8);
+		padding: fluid(14, 10);
+		background-color: var(--color-black-08);
+		border: var(--border);
+		border-radius: var(--border-radius-s);
 
-		@include hover {
-			border-color: var(--color-white);
+		.person-card__image {
+			width: fluid-to-laptop(57, 47);
+			border-radius: var(--border-radius-s);
+
+			@include laptop {
+				border-radius: var(--border-radius-xs);
+			}
 		}
+	}
+
+	&__image {
+		&:only-child { // Стили ниже будут работать только когда person-card__body не выводится
+			width: fluid(102, 70);
+			border: 1px solid transparent;
+			border-radius: var(--border-radius-l);
+			transition-duration: var(--transition-duration);
+			
+			@include laptop {
+				border-radius: var(--border-radius-m);
+			}
+	
+			@include hover {
+				border-color: var(--color-white);
+			}
+		}
+	}
+
+	&__name {
+		font-size: fluid-to-laptop(18, 16);
+		font-weight: 500;
 	}
 }

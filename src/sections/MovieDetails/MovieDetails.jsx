@@ -4,6 +4,10 @@ import Slider from '../../components/Slider'
 import PersonCard from '../../components/PersonCard'
 import Button from '../../components/Button'
 import ReviewCard from '../../components/ReviewCard/ReviewCard'
+import Icon from '@/components/Icon'
+import Tags from '../../components/Tags'
+import Ratings from '../../components/Ratings'
+
 
 const MovieDetails = () => {
 	const titleId = 'movie-details-title' // Для связывания заголовка с секцией
@@ -163,9 +167,65 @@ const MovieDetails = () => {
 				</div>
 			</div>
 			<aside className="movie-datails__info">
-				<div className="movie-details__panel"></div>
-				<div className="movie-details__panel"></div>
-				<div className="movie-details__panel"></div>
+				<div className="movie-details__panel">
+					<div className="movie-details__groups">
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								<Icon name="calendar" />
+								<span>Released Year</span>
+							</h3>
+							<div className="movie-details__description">
+								<time className="h6" datetime="2022">2022</time>
+							</div>
+						</div>
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								<Icon name="language" />
+								<span>Available Languages</span>
+							</h3>
+							<Tags items={['English', 'Russian', 'Hindi', 'Tamil', 'Telegu', 'Kannada']}/>
+						</div>
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								<Icon name="star" />
+								<span>Ratings</span>
+							</h3>
+							<Ratings 
+								items={[
+									{ title:"IMDb", ratingValue:"5" },
+									{ title:"Streamvibe", ratingValue:"4" },
+								]} 
+							/>
+						</div>
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								<Icon name="genres" />
+								<span>Genres</span>
+							</h3>
+							<Tags items={['Action', 'Adventure']} />
+						</div>
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								Director
+							</h3>
+							<PersonCard
+								name="Darren Aronofsky"
+								subtitle="From USA"
+								imgSrc="/src/assets/images/people/director/1.jpg"
+							/>
+						</div>
+						<div className="movie-details__group">
+							<h3 className="movie-details__title">
+								Music
+							</h3>
+							<PersonCard
+								name="Clint Mansel"
+								subtitle="From USA"
+								imgSrc="/src/assets/images/people/director/2.jpg"
+							/>
+						</div>
+					</div>
+				</div>
 			</aside>
 		</section>
 	)
