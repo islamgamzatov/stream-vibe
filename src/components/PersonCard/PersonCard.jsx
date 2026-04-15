@@ -1,4 +1,5 @@
 import './PersonCard.scss'
+import { Image } from 'minista'
 
 const PersonCard = (props) => {
 	const {

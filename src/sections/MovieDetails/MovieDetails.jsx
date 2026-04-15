@@ -1,10 +1,79 @@
 import './MovieDetails.scss'
 import SliderNavigation from '../../components/Slider/components/SliderNavigation'
 import Slider from '../../components/Slider'
+import PersonCard from '../../components/PersonCard'
+import Button from '../../components/Button'
+import ReviewCard from '../../components/ReviewCard/ReviewCard'
 
 const MovieDetails = () => {
 	const titleId = 'movie-details-title' // Для связывания заголовка с секцией
 	const castSliderNavigationId = 'movie-cast-slider-navigation' // Для слейдера в блоке cast
+
+	const castItems = [
+		{ imgSrc: '/src/assets/images/people/1.jpg', imgAlt: 'Jennifer Connelly' },
+		{ imgSrc: '/src/assets/images/people/2.jpg', imgAlt: 'Jared Leto' },
+		{ imgSrc: '/src/assets/images/people/3.jpg', imgAlt: 'Ellen Burstyn' },
+		{ imgSrc: '/src/assets/images/people/4.jpg', imgAlt: 'Marlon Wayans' },
+		{ imgSrc: '/src/assets/images/people/1.jpg', imgAlt: 'Jennifer Connelly' },
+		{ imgSrc: '/src/assets/images/people/2.jpg', imgAlt: 'Jared Leto' },
+		{ imgSrc: '/src/assets/images/people/3.jpg', imgAlt: 'Ellen Burstyn' },
+		{ imgSrc: '/src/assets/images/people/4.jpg', imgAlt: 'Marlon Wayans' },
+		{ imgSrc: '/src/assets/images/people/1.jpg', imgAlt: 'Jennifer Connelly' },
+		{ imgSrc: '/src/assets/images/people/2.jpg', imgAlt: 'Jared Leto' },
+		{ imgSrc: '/src/assets/images/people/3.jpg', imgAlt: 'Ellen Burstyn' },
+		{ imgSrc: '/src/assets/images/people/4.jpg', imgAlt: 'Marlon Wayans' },
+	]
+
+	const reviewItems = [
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+		{
+			name: "Aniket Roy",
+			subtitle: "From India",
+			description: "This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.",
+			ratingValue: 5,
+		},
+	]
 
 	return (
 		<section
@@ -39,21 +108,59 @@ const MovieDetails = () => {
 						navigationTargetElementId={castSliderNavigationId}
 						hasScrollBarOnMobile={false}
 						sliderParams={{
-							sliderPerView: 'auto',
+							slidesPerView: 'auto',
 							spaceBetween: 10,
-							breakPoints: {
+							breakpoints: {
 								1024: {
-									sliderPerView: 'auto',
+									slidesPerView: 'auto',
 									spaceBetween: 20,
 									allowTouchMove: false, // Нужно, чтобы слайдер не свайпался с помощью курсора мыши.
 								}
 							}
 						}}
-					/>
-						
-					<Slider/>
+					>
+						{castItems.map((castItem, index) => (
+							<PersonCard {...castItem} key={index} />
+						))}
+					</Slider>
 				</div>
-				<div className="movie-details__panel"></div>
+				<div className="movie-details__panel">
+					<header className="movie-details__panel-header">
+						<h3 className="movie-details__title">Reviews</h3>
+						<Button
+							mode="black-08"
+							iconName="plus"
+							label="Add Your Review"
+							href="/"
+						/>
+					</header>
+					<Slider
+						navigationMode="rounded"
+						isNavigationHiddenMobile={false}
+						hasScrollBarOnMobile={false}
+						sliderParams = {{
+							slidesPerView: 2,
+							slidesPerGroup: 2,
+							breakpoints: {
+								0: {
+									slidesPerView: 1,
+									slidesPerGroup: 1,
+									spaceBetween: 16,
+								},
+								1024: {
+									slidesPerView: 2,
+									slidesPerGroup: 2,
+									allowTouchMove: false,
+									spaceBetween: 20,
+								},
+							}
+						}}
+					>
+						{reviewItems.map((reviewItem, index) => (
+							<ReviewCard {...reviewItem} key={index}/>
+						))}
+					</Slider>
+				</div>
 			</div>
 			<aside className="movie-datails__info">
 				<div className="movie-details__panel"></div>
