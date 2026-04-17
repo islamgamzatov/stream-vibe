@@ -33,6 +33,26 @@
 		}
 	}
 
+	&--dark {
+		display: grid;
+		row-gap: fluid-to-laptop(20, 16);
+
+		.accordion-group__item {
+			padding: fluid(24, 16) fluid(50, 20);
+			background-color: var(--color-black-06);
+			border: var(--border);
+			border-radius: var(--border-radius-l);
+
+			@include laptop {
+				border-radius: var(--border-radius-m);
+			}
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+ 
 	&--2-columns {
 		column-gap: fluid-to-laptop(80, 40);
 

@@ -3,6 +3,10 @@ import './AccordionGroup.scss'
 
 const AccordionGroup = (props) => {
 	const {
+		/*
+			'' (default) | 'dark'
+		*/
+		mode = '',
 		columns = 1,
 		children = [],
 		isOrderedList = true // Данный параметр будет отвечать за тип используемого списка в качестве корневого элемента компонента. Если isOrderedList = true, то мы будет использовать ol и через css выводить порядковые числа возле каждого элемента AccordionGroup.
@@ -16,6 +20,7 @@ const AccordionGroup = (props) => {
 			className={classNames('accordion-group', {
 				[`accordion-group--${columns}-columns`]: columns > 1, // В этом объекте первое свойство будет отвечать за БЭМ-модификатор по количеству колонок.
 				'accordion-group--has-counter': isOrderedList, // За этот класс мы будем цепляться в стилях, чтобы добавлять дочерним элементам списка кастомный счетчик числа.
+				[`accordion-group--${mode}`]: mode,
 			})}
 		>
 			{children.map((child, index) => (

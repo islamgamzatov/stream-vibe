@@ -16,10 +16,16 @@
 
 	@include tablet {
 		.movie-details {
-			&__panel--description {
-				order: -2;
+			&__panel {
+				&--description {
+					order: -2;
+				}
+
+				&--seasons {
+					order: -3;
+				}
 			}
-	
+			
 			&__info {
 				order: -1;
 			}
@@ -75,6 +81,10 @@
 	&__group {
 		display: grid;
 		row-gap: fluid-to-laptop(14, 10);
+
+		&--big-gap-y {
+			row-gap: fluid(40, 20);
+		}
 	}
 
 	&__title, &__description {

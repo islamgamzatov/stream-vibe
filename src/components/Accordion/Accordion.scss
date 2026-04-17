@@ -1,6 +1,17 @@
 .accordion {
 	width: 100%;
 
+	&:has(.accordion__arrow) {
+		.accordion__title {
+			padding-right: 0;
+
+			&::before,
+			&::after {
+				display: none;
+			}
+		}
+	}
+
 	&__details {
 		&[open] {
 			.accordion__title::after {
@@ -9,6 +20,10 @@
 
 			& + .accordion__content { // Через селектор смежного элемента обратимся к соседнему, что лежит на том же уровне.
 				grid-template-rows: 1fr;
+			}
+
+			.accordion__arrow {
+				rotate: 180deg;
 			}
 		}
 	}
@@ -34,6 +49,7 @@
 		position: relative;
 		display: flex;
 		align-items: center;
+		column-gap: fluid(10, 6);
 		min-height: var(--acordionGroupCounterHeight); // Когда аккордеон закрыт, блок с числом, заголовок и значок выравнены по одной линии, а при раскрытии ничего не меняется.
 		padding-right: 50px;// Зарезервируем под значок пространство. Т.к. как значок мы рисовали через CSS и псевдоэлементы, которые располлагали абсолютом относительно заголовка, то, чтобы при длинном заголовке текст не наехал на значок, нужно самому элементу заголовка задать какой-нибудь внутрненний отступ вправо.
 		color: inherit;
@@ -60,6 +76,24 @@
 		&::after {
 			rotate: 90deg;
 		}
+	}
+
+	&__subtitle {
+		font-size: 0.75em; // Размер шрифта вычислим в относительных EM-единицах: если основной текст заголовка здесь 24px, а серый текст справа 18px, то 18/24 = 0.75
+		font-weight: 500;
+		color: var(--color-gray-60);
+	}
+
+	&__arrow {
+		@include flex-center(true);
+		@include square(fluid-to-laptop(52, 44));
+
+		margin-left: auto; // Прибиваем элемент к правой части родительского блока.
+		color: var(--color-gray-60);
+		background-color: var(--color-black-08);
+		border: var(--border);
+		border-radius: 50%;
+		transition-duration: var(--transition-duration);
 	}
 
 	&__content {

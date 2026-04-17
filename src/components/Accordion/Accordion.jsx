@@ -1,12 +1,17 @@
 import './Accordion.scss'
+import classNames from 'classnames'
+import Icon from '@/components/Icon'
 
 const Accordion = (props) => {
 	const {
 		title,
+		titleLevelClassName = 'h5',
+		subtitle,
 		id,
 		name, // name нужен, чтобы сгруппировать несколько Accordion в одну группу, чтобы при раскрытии содержимого одного закрывались все другие Accordion из той же группы.
 		isOpen, // Параметр будет отвечать за начальное состояние Accordion
-		children // Внутренне содержимое. То, что раскрывается по клику на заголовок
+		children, // Внутренне содержимое. То, что раскрывается по клику на заголовок
+		isArrowButton,
 	} = props
 
 	return (
@@ -21,8 +26,18 @@ const Accordion = (props) => {
 				open={isOpen} // Атрибут open у элемента details отвечает за начальное состояние отображения внутреннего содержимого после загрузки страницы.
 			>
 				<summary className="accordion__summary">
-					<h3 className="accordion__title h5">
+					<h3 
+						className={classNames('accordion__title', titleLevelClassName)}
+					>
 						<span role='term' aria-details={id}>{title}</span> {/* этот span нужен для того, чтобы грамотно обеспечить accessibility нашему компоненту аккордеона */}
+						{subtitle && <span className='accordion__subtitle'>{subtitle}</span>}
+						{isArrowButton && (
+							<div className='accordion__arrow'>
+								<Icon
+									name="arrow-down"
+								/>
+							</div>
+						)}
 					</h3>
 				</summary>
 			</details>
