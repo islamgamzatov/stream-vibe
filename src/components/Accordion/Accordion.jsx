@@ -4,6 +4,7 @@ import Icon from '@/components/Icon'
 
 const Accordion = (props) => {
 	const {
+		className,
 		title,
 		titleLevelClassName = 'h5',
 		subtitle,

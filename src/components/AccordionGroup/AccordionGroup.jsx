@@ -3,6 +3,7 @@ import './AccordionGroup.scss'
 
 const AccordionGroup = (props) => {
 	const {
+		className,
 		/*
 			'' (default) | 'dark'
 		*/
@@ -17,7 +18,7 @@ const AccordionGroup = (props) => {
 	
 	return (
 		<ListTag
-			className={classNames('accordion-group', {
+			className={classNames(className, 'accordion-group', {
 				[`accordion-group--${columns}-columns`]: columns > 1, // В этом объекте первое свойство будет отвечать за БЭМ-модификатор по количеству колонок.
 				'accordion-group--has-counter': isOrderedList, // За этот класс мы будем цепляться в стилях, чтобы добавлять дочерним элементам списка кастомный счетчик числа.
 				[`accordion-group--${mode}`]: mode,
