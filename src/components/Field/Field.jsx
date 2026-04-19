@@ -19,11 +19,18 @@ const Field = (props) => {
 		placeholder,
 		isRequired,
 		inputMode,
+		mask,
 	} = props
 
 	const Component = type === 'textarea'
 		? 'textarea'
 		: 'input'
+
+	const extraAttrs = {}
+
+	if (mask) {
+		extraAttrs['data-js-input-mask'] = mask
+	}
 
 	return (
 		<div
@@ -48,6 +55,7 @@ const Field = (props) => {
 					placeholder={placeholder}
 					required={isRequired}
 					inputMode={inputMode} // Нужен полю ввода номер телефона, чтобы на устройствах с виртуальной клавиатурой (touch screen) автоматически подставлялась нужная виртуальная клавиатура, содержащая только цифры и символы (+, *, #)
+					{...extraAttrs}
 				/>
 			</div>
 		</div>

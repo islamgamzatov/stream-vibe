@@ -28,32 +28,33 @@ const Support = () => {
 				<Field
 					className="support__form-cell"
 					label="First Name"
-					placeHolder="Ivan"
+					placeholder="Ivan"
 					isRequired
 				/>
 				<Field
 					className="support__form-cell"
 					label="Last Name"
-					placeHolder="Ivanov"
+					placeholder="Ivanov"
 				/>
 				<Field
 					className="support__form-cell"
 					label="Email"
 					type="email"
-					placeHolder="example@example.com"
+					placeholder="example@example.com"
 					isRequired
 				/>
 				<Field
 					className="support__form-cell"
 					label="Phone Number"
-					placeHolder="(999) 999-99-99"
+					placeholder="(999) 999-99-99"
 					inputMode="tel"
+					mask="(000) 000-00-00"
 				/>
 				<Field
 					className="support__form-cell support__form-cell--wide"
 					label="Message"
 					type="textarea"
-					placeHolder="Hi! I have a question..."
+					placeholder="Hi! I have a question..."
 					isRequired
 				/>
 			</form>
