@@ -1,0 +1,62 @@
+.checkbox {
+	display: inline-flex;
+	align-items: center;
+	column-gap: fluid-to-laptop(10, 8);
+
+	@include hover {
+		color: var(--color-white);
+
+		.checkbox__input {
+			border-color: var(--color-white);
+		}
+	}
+
+	&__input {
+		/*
+			Таким образом мы включим возможность стилизовать чекбокс так, как нам надо
+			(также мы сможем добавить к нему псевдоэлементы, что без указания appearance невозможно)
+		*/
+		appearance: none;
+
+		@include flex-center;
+		@include square(fluid-to-laptop(28, 24));
+
+		margin: 0; // Сбросим отступы у чекбокса, заданные по умолчанию.
+		background-color: var(--color-black-06);
+		border: var(--border);
+		border-radius: var(--border-radius-xxxs);
+
+		&:not(:checked)::after {
+			@include hide; // Так мы скроем галочку чекбокса, когда чекбокс в состоянии не отмечено
+		}
+
+		&:user-invalid {
+			border-color: var(--color-red-45);
+		}
+
+		/*
+			 У элемента input с классом checkbox__input может быть состояние disabled,
+			 когда на нем есть это состояние, мы обращаемся и к checkbox__input, и к checkbox__label (следующему за ним элементу)
+			 И для обоих этих элементов мы приминяем стили из внутренностей миксина disabled.
+		*/
+		&:disabled {
+			&,
+			& + .checkbox__label {
+				@include disabled;
+			}
+		}
+
+		&:required {
+			& + .checkbox__label::after {
+				content: ' *' / ''; // (/ '') - эта часть нужна, чтобы скринридеры не озвучивали этот псевдоэлемент
+				color: var(--color-red-45);
+			}
+		}
+
+		&::after {
+			content: '✔';
+			color: var(--color-white);
+			transition-duration: inherit;
+		}
+	}
+}

@@ -1,6 +1,8 @@
 import './Support.scss'
 import { Image } from 'minista'
 import Field from '../../components/Field'
+import Checkbox from '../../components/Checkbox'
+import Button from '../../components/Button'
 
 const Support = () => {
 	const titleId = 'support-title'
@@ -57,6 +59,18 @@ const Support = () => {
 					placeholder="Hi! I have a question..."
 					isRequired
 				/>
+				<div className="support__form-cell support__form-cell--wide support__form-cell--actions">
+					<Checkbox
+						className="support__form-agreement"
+						label="I agree with Terms of Use and Privacy Policy"
+						isRequired
+					/>
+					<Button
+						className="support__form-submit-button"
+						label="Send Message"
+						type="submit"
+					/>
+				</div>
 			</form>
 		</section>
 	)
