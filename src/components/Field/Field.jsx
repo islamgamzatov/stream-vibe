@@ -1,5 +1,6 @@
 import './Field.scss'
 import classNames from 'classnames'
+import getIdGromTitle from '../../utils/getIdFromTitle'
 
 const Field = (props) => {
 	const {
@@ -9,7 +10,7 @@ const Field = (props) => {
 			когда компоненту Field в параметр id ничего не передали.
 			Теперь параметр считается как бы не обязательным.
 		*/
-		id = getIdFromTitle(props.label), 
+		id = getIdGromTitle(props.label),
 		label,
 		/*
 			undefined (default) | 'email' | 'text-area'
@@ -17,6 +18,7 @@ const Field = (props) => {
 		type,
 		placeholder,
 		isRequired,
+		inputMode,
 	} = props
 
 	const Component = type === 'textarea'
@@ -45,6 +47,7 @@ const Field = (props) => {
 					type={type}
 					placeholder={placeholder}
 					required={isRequired}
+					inputMode={inputMode} // Нужен полю ввода номер телефона, чтобы на устройствах с виртуальной клавиатурой (touch screen) автоматически подставлялась нужная виртуальная клавиатура, содержащая только цифры и символы (+, *, #)
 				/>
 			</div>
 		</div>
