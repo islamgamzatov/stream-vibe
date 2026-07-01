@@ -20,6 +20,7 @@ const Field = (props) => {
 		isRequired,
 		inputMode,
 		mask,
+		rednerBefore,
 	} = props
 
 	const Component = type === 'textarea'
@@ -48,6 +49,7 @@ const Field = (props) => {
 				)}
 			</label>
 			<div className="field__body"> {/* Зачем, собственно говоря, нужна эта обертка? Есть вариации field__body, внутри которых выводится не только input, но и select*/}
+				{rednerBefore?.('field__control')}
 				<Component
 					className="field__control"
 					id={id}
