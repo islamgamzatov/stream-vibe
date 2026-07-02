@@ -1,0 +1,144 @@
+.select {
+	--selectButtonArrowIconUrl: url('../../assets/images/select/arrow-down_gray.svg');
+	--selectButtonArrowIconSize: #{fluid-to-laptop(24, 20)};
+	--selectButtonGapX: #{fluid-to-laptop(6, 4)};
+	--selectButtonPaddingX: #{fluid-to-laptop(12, 8)};
+
+	flex-shrink: 0; // Запрещаем эоементу сжиматься при нехватке места в контейнере
+
+	&__original-control,
+	&__button {
+		min-width: 94px;
+	}
+
+	&__original-control {
+		appearance: none; // Отключаем стрелочку по умолчанию
+		padding-left: var(--selectButtonPaddingX);
+		padding-right: calc(
+			var(--selectButtonArrowIconSize) + var(--selectButtonPaddingX) + var(--selectButtonGapX)
+		); // Благодаря внутрненним отступам справа резервируем пространство под фоновую иконку так, что независимо от кол-ва	контента в элементе, текст никогда не перекроет фоновую иконку.
+		background-image: var(--selectButtonArrowIconUrl);
+		background-position: calc(100% - var(--selectButtonPaddingX)) 50%;
+		background-size: var(--selectButtonArrowIconSize);
+		background-repeat: no-repeat;
+
+		@include mobile-above {
+			@include visually-hidden; // Через display: none скрывать здесь мне не имеет право, чтобы не ломать подкапотный функционал будущего js модуля. Нам важно сохранить синхронизацию между оригинальным селектом и его кастомным вариантом.
+		}
+
+		&:disabled {
+			& + .select__body {
+				@include disabled;
+
+				* {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+
+	&__body {
+		position: relative;
+	}
+
+	/*
+		Иконку со стрелкой нам нужно вывести и для select__original-control, и для select__button.
+		Для оригинального селекта мы можем сделать это через фон самого элемента оригинального селекта.
+		Для select__button у нас получится добавить псевдоэлемент, к которому мы прицепим иконку фоном.
+		Это понадобится, чтобы при клике на эту кнопку открывался дроп даун список опций и в это время серая стрелка поворачивалась на 180 градусов.
+	*/
+
+	&__button,
+	&__option {
+		user-select: none; // Теперь при double tap внутренний текст не будет выделяться.
+		cursor: pointer; // Чтобы было очевиднее, что на элементы можно кликнуть.
+
+		* {
+			pointer-events: none;
+		}
+	}
+
+	&__button {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		column-gap: var(--selectButtonGapX);
+		padding-inline: var(--selectButtonPaddingX);
+		transition-duration: var(--transition-duration);
+
+		@include mobile {
+			@include visually-hidden; // Через display: none скрывать здесь мне не имеет право, чтобы не ломать подкапотный функционал будущего js модуля. Нам важно сохранить синхронизацию между оригинальным селектом и его кастомным вариантом.
+		}
+
+		&::after {
+			@include square(var(--selectButtonArrowIconSize));
+			content: '';
+			background: var(--selectButtonArrowIconUrl) center/contain no-repeat;
+			transition-duration: inherit;
+		}
+
+		&.is-expanded {
+			&::after {
+				rotate: 180deg;
+			}
+		}
+	}
+
+	&__dropdown {
+		position: absolute;
+		top: calc(100% + 4px);
+		display: grid;
+		row-gap: 4px;
+		min-width: 300px;
+		min-height: 250px;
+		overflow-y: auto; // Скролл на случай, если опций будет много
+		overscroll-behavior: none; // При скролле выпадающего списка, когда он закончится, чтобы не продолжалась скролиться целиком вся страница.
+		padding: 4px;
+		background-color: var(--color-black-06);
+		border: var(--border);
+		border-radius: var(--border-radius-l);
+		transition-duration: var(--transition-duration);
+
+		&.is-on-the-left-side {
+			left: 0;
+			transform-origin: 0 0;
+		}
+
+		&.is-on-the-right-side {
+			right: 0;
+			transform-origin: 100% 0;
+		}
+
+		&:not(.is-expanded) {
+			@include hide;
+
+			scale: 0; // Для пущего эффекта укажем scale.
+		}
+	}
+
+	&__option {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		column-gap: 10px;
+		padding: 10px;
+		border: var(--border);
+		border-radius: inherit;
+
+		@include hover {
+			border-color: var(--color-white);
+		}
+
+		&.is-selected {
+			color: var(--color-white);
+
+			&::after {
+				content: '✔';
+			}
+		}
+
+		&.is-current {
+			color: var(--color-white);
+		}
+	}
+}

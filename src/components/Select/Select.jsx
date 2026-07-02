@@ -68,7 +68,7 @@ const Select = (props) => {
 					tabIndex={0}
 					data-js-select-button=""
 				>
-					{selectedOption.label}
+					{selectedOption.value}
 				</div>
 				<div 
 					className="select__dropdown"
