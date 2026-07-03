@@ -32,14 +32,15 @@ class Select extends BaseComponent {
 		this.originalControlElement = rootElement.querySelector(this.selectors.originalControl)
 		this.buttonElement = rootElement.querySelector(this.selectors.button)
 		this.dropdownElement = rootElement.querySelector(this.selectors.dropdown)
-		this.optionsElements = rootElement.querySelectorAll(this.selectors.option)
+		this.optionElements = rootElement.querySelectorAll(this.selectors.option)
 		this.state = this.getProxyState({ // При обновлении значений в объекте state будет автоматически вызываться метод updateUI
 			...this.initialState,
 			currentOptionIndex: this.originalControlElement.selectedIndex, // У DOM-элемента оригинального селекта есть встроенное свойство selectedIndex. Оно возвращает или задает индекс текущего выбранного элемента <option>
-			selectedOptionElement: this.optionsElements[this.originalControlElement.selectedIndex],
+			selectedOptionElement: this.optionElements[this.originalControlElement.selectedIndex],
 		})
 		setTimeout(this.fixDropdownPosition, 500) // Задержка в пол секунды нужна, чтобы наверняка произвести корректные расчеты. Если вызывать метод мгновенно, то могут возникнуть колизии и dropdown может быть споцизионирован не правильно.
 		this.updateTabIndexes()
+		this.bindEvents()
 	}
 
 	updateUI() {
@@ -66,7 +67,7 @@ class Select extends BaseComponent {
 			this.buttonElement.textContent = newSelectedOptionValue
 			this.buttonElement.classList.toggle(this.stateClasses.isExpanded, isExpanded)
 			this.buttonElement.ariaExpanded = isExpanded
-			this.buttonElement.ariaActiveDescendant = this.optionsElements[currentOptionIndex].id
+			this.buttonElement.ariaActiveDescendant = this.optionElements[currentOptionIndex].id
 		}
 
 		const updateDropdown = () => {
@@ -74,9 +75,9 @@ class Select extends BaseComponent {
 		}
 
 		const updateOptions = () => {
-			this.optionsElements.forEach((optionElement, index) => {
-				const isCurrent = currentOptionIndex === optionElement
-				const isSelected = selectedOptionElement === index
+			this.optionElements.forEach((optionElement, index) => {
+				const isCurrent = currentOptionIndex === index
+				const isSelected = selectedOptionElement === optionElement
 
 				optionElement.classList.toggle(this.stateClasses.isCurrent, isCurrent)
 				optionElement.classList.toggle(this.stateClasses.isSelected, isSelected)
@@ -123,7 +124,62 @@ class Select extends BaseComponent {
 		this.originalControlElement.tabIndex = isMobileDevice ? 0 : -1
 		this.buttonElement.tabIndex = isMobileDevice ? -1 : 0
 	}
-}	
+
+	// Метод меняет состояние поля isExpanded на противоположное
+	toggleExpandedState() {
+		this.state.isExpanded = !this.state.isExpanded
+	}
+
+	expand() {
+		this.state.isExpanded = true
+	}
+
+	collapse() {
+		this.state.isExpanded = false
+	}
+
+	onMobileMatchMediaChange = (event) => { // Этот объект называется MediaQueryListEvent. Это специальный объект, который браузер создает, чтобы передать тебе информацию о том, что изменилось.
+		this.updateTabIndexes(event.matches)
+	}
+
+	onOriginalControlChange = () => {
+		this.state.selectedOptionElement = this.optionElements[this.originalControlElement.selectedIndex]
+	}
+
+	onButtonClick = () => {
+		this.toggleExpandedState()
+	}
+
+	// Метод обрабатывает клик вне dropdown и вне кнопки его открытия. .closest(...) — встроенный метод JavaScript. Он берет элемент target и начинает подниматься вверх по дереву DOM (к родителям, прародителям и так далее).
+	onClick = (event) => {
+		const { target } = event // Свойство target будет хранить ссылку на элемент, который был кликнут.
+
+		const isButtonClick = target === this.buttonElement
+		const isOutsideDropdownClick = target.closest(this.selectors.dropdown) !== this.dropdownElement
+
+		if (!isButtonClick && isOutsideDropdownClick) {
+			this.collapse()
+			return
+		}
+
+		const isOptionClick = target.matches(this.selectors.option) // Метод возвращает булевое значение, определяемое соответствием селектору, переданному аргументом.
+
+		if (isOptionClick) {
+			this.state.selectedOptionElement = target
+			this.state.currentOptionIndex = [...this.optionElements]
+				.findIndex((optionElement) => optionElement === target)
+			this.collapse()
+		}
+	}
+
+	// В теле этого метода мы будем привязывать слушатилели различных событий, необходимых для работы нашего кастомного селекта.
+	bindEvents() {
+		MatchMedia.mobile.addEventListener('change', this.onMobileMatchMediaChange)
+		this.originalControlElement.addEventListener('change', this.onOriginalControlChange)
+		this.buttonElement.addEventListener('click', this.onButtonClick)
+		document.addEventListener('click', this.onClick)
+	}
+}
 
 class SelectCollection {
 	constructor() {
