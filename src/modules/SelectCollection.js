@@ -138,6 +138,16 @@ class Select extends BaseComponent {
 		this.state.isExpanded = false
 	}
 
+	get isNeedToExpand() {
+		const isOnButtonFocused = document.activeElement === this.buttonElement
+
+		return (!this.state.isExpanded && isOnButtonFocused)
+	}
+
+	selectCurrentOption() {
+		this.state.selectedOptionElement = this.optionElements[this.state.currentOptionIndex]
+	}
+
 	onMobileMatchMediaChange = (event) => { // Этот объект называется MediaQueryListEvent. Это специальный объект, который браузер создает, чтобы передать тебе информацию о том, что изменилось.
 		this.updateTabIndexes(event.matches)
 	}
@@ -172,12 +182,76 @@ class Select extends BaseComponent {
 		}
 	}
 
+	onArrowUpKeyDown = () => {
+		if (this.isNeedToExpand) {
+			this.expand()
+			return
+		}
+
+		if (this.state.currentOptionIndex > 0) {
+			this.state.currentOptionIndex--
+		}
+	}
+
+	onArrowDownKeyDown = () => {
+		if (this.isNeedToExpand) {
+			this.expand()
+			return
+		}
+
+		if (this.state.currentOptionIndex < this.optionElements.length - 1) {
+			this.state.currentOptionIndex++
+		}
+	}
+
+	onSpaceKeyDown = () => {
+		if (this.isNeedToExpand) {
+			this.expand()
+			return
+		}
+
+		this.selectCurrentOption()
+		this.collapse()
+	}
+
+	onEnterKeyDown = () => {
+		if (this.isNeedToExpand) {
+			this.expand()
+			return
+		}
+
+		this.selectCurrentOption()
+		this.collapse()
+	}
+
+	onEscapeKeyDown = () => {
+		this.collapse()
+	}
+
+	onKeyDown = (event) => {
+		const { code } = event
+
+		const action = {
+			ArrowUp: this.onArrowUpKeyDown,
+			ArrowDown: this.onArrowDownKeyDown,
+			Space: this.onSpaceKeyDown,
+			Enter: this.onEnterKeyDown,
+			Escape: this.onEscapeKeyDown,
+		}[code]
+
+		if (action) {
+			event.preventDefault()
+			action()
+		}
+	}
+
 	// В теле этого метода мы будем привязывать слушатилели различных событий, необходимых для работы нашего кастомного селекта.
 	bindEvents() {
 		MatchMedia.mobile.addEventListener('change', this.onMobileMatchMediaChange)
 		this.originalControlElement.addEventListener('change', this.onOriginalControlChange)
 		this.buttonElement.addEventListener('click', this.onButtonClick)
 		document.addEventListener('click', this.onClick)
+		this.rootElement.addEventListener('keydown', this.onKeyDown)
 	}
 }
 
