@@ -2,6 +2,9 @@
 	--tabsBodyRowGap: 0;
 	--tabsNonActiveContentDisplay: none;
 
+	display: grid;
+	row-gap: 20px	;
+
 	&--enable-only-on-mobile {
 		@include mobile-above {
 			--tabsNonActiveContentDisplay: block; // Таким образом, если мы передали компоненту табов параметр isEnableOnlyOnMobile, мы актвириуем класическую механику компонента табов только на ширине экранов 767 и уже, а на desktop будет обычным блоком без сторонних стилей.

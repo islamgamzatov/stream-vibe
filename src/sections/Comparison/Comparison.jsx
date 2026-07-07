@@ -1,6 +1,8 @@
 import Section from "../../layouts/Section"
 import Table from "../../components/Table"
 import Badge from "../../components/Badge"
+import Specifications from "../../components/Specifications"
+import Tabs from '../../components/Tabs'
 
 const Comparison = () => {
 	const headCells = [
@@ -11,14 +13,17 @@ const Comparison = () => {
 		{
 			children: 'Basic',
 			width: '25%',
+			tabsTitle: 'Basic',
 		},
 		{
 			children: <>Standart <Badge mode="accent">Popular</Badge></>,
 			width: '25%',
+			tabsTitle: 'Standart',
 		},
 		{
 			children: 'Premium',
 			width: '25%',
+			tabsTitle: 'Premium',
 		},
 	]
 
@@ -37,7 +42,8 @@ const Comparison = () => {
 				'Access to a wide selection of movies and shows, including some new releases.',
 				'Access to a wider selection of movies and shows, including most new releases and exclusive content',
 				'Access to widest selection of movies and shows, including all new releases and Offline Viewing'
-			]
+			],
+			isWide: true,
 		},
 		{
 			cells: [
@@ -45,7 +51,8 @@ const Comparison = () => {
 				'Watch on one device simultaneously',
 				'Watch on Two device simultaneously',
 				'Watch on Four device simultaneously'
-			]
+			],
+			isWide: true,
 		},
 		{
 			cells: [
@@ -105,13 +112,38 @@ const Comparison = () => {
 		}
 	]
 
+	const tabsItems = headCells
+		.filter((headCell) => (headCell.tabsTitle))
+		.map((headCell, headCellIndex) => ({
+			title: headCell.tabsTitle,
+			isActive: headCellIndex === 0,
+			children: (
+				<Specifications
+					items={rows.map(({ cells, isWide }, index) => ({
+						key: cells[0],
+						value: cells[headCellIndex + 1],
+						isWide,
+					}))}
+				/>
+			)
+		}))
+
 	return (
 		<Section
 			title="Compare our plans and find the right one for you"
 			titleId="comparison-id"
 			description="StreamVibe offers three different plans to fit your needs: Basic, Standard, and Premium. Compare the features of each plan and choose the one that's right for you."
 		>
-			<Table headCells={headCells} rows={rows}/>
+			<Table
+				className="hidden-mobile"
+				headCells={headCells}
+				rows={rows}
+			/>
+			<Tabs
+				className="visible-mobile"
+				title="comparison-tabs-title"
+				items={tabsItems}
+			/>
 		</Section>
 	)
 }

@@ -7,8 +7,9 @@
 
 	&__list {
 		display: grid;
-		grid-template-columns: repeat(2fr, 1);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 24px 20px;
+		grid-auto-flow: dense;
 	}
 
 	&__item {
